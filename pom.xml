@@ -50,6 +50,7 @@
 				<configuration>
 					<image>
 						<name>boot3demo.azurecr.io/${project.artifactId}</name>
+						<publish>true</publish>
 					</image>
 					<layers>
 						<enabled>true</enabled>
