@@ -12,6 +12,11 @@ jobs:
           components: 'native-image'
           cache: 'maven'
           github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: azure/docker-login@v1
+        with:
+          login-server: boot3demo.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build Image
         run: |
           echo "GRAALVM_HOME: $GRAALVM_HOME"
@@ -21,3 +26,9 @@ jobs:
           native-image --version
           mvn --version
           mvn -Pnative spring-boot:build-image
+          mvn publish
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'boot3demo'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: 'boot3demo.azurecr.io/boot3demo:${{ github.sha }}'
