@@ -25,8 +25,8 @@ jobs:
           gu --version
           native-image --version
           mvn --version
-          mvn -Pnative spring-boot:build-image
-          mvn publish
+          mvn spring-boot:build-image
+          mvn deploy
       - uses: azure/webapps-deploy@v2
         with:
           app-name: 'boot3demo'
