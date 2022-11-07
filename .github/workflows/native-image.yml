@@ -25,9 +25,9 @@ jobs:
           gu --version
           native-image --version
           mvn --version
-          export MAVEN_OPTS="--batch-mode -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
-          echo mvn $MAVEN_OPTS -Pnative spring-boot:build-image 
-          mvn $MAVEN_OPTS -Pnative spring-boot:build-image 
+          mvn --help
+          export MAVEN_OPTS="-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+          mvn -Pnative spring-boot:build-image 
           # docker push boot3demo.azurecr.io/boot3demo:${{ github.sha }}
       - uses: azure/webapps-deploy@v2
         with:
