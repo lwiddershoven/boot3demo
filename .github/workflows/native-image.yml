@@ -18,17 +18,12 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build Image
+        env:
+          REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
         run: |
-          echo "GRAALVM_HOME: $GRAALVM_HOME"
-          echo "JAVA_HOME: $JAVA_HOME"
-          java --version
-          gu --version
-          native-image --version
-          mvn --version
-          mvn --help
           export MAVEN_OPTS="-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
-          mvn -Pnative spring-boot:build-image 
-          # docker push boot3demo.azurecr.io/boot3demo:${{ github.sha }}
+          mvn -B -Pnative spring-boot:build-image 
       - uses: azure/webapps-deploy@v2
         with:
           app-name: 'boot3demo'

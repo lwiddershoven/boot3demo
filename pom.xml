@@ -52,6 +52,13 @@
 						<name>boot3demo.azurecr.io/${project.artifactId}</name>
 						<publish>true</publish>
 					</image>
+					<docker>
+						<publishRegistry>
+							<username>${env.REGISTRY_USERNAME}</username>
+							<password>${env.REGISTRY_PASSWORD}</password>
+							<url>https:/>boot3demo.azurecr.io/</url>
+						</publishRegistry>
+					</docker>
 					<layers>
 						<enabled>true</enabled>
 						<includeLayerTools>true</includeLayerTools>
