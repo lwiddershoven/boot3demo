@@ -56,7 +56,7 @@
 						<publishRegistry>
 							<username>${env.REGISTRY_USERNAME}</username>
 							<password>${env.REGISTRY_PASSWORD}</password>
-							<url>https:/>boot3demo.azurecr.io/</url>
+							<url>https://boot3demo.azurecr.io/</url>
 						</publishRegistry>
 					</docker>
 					<layers>
