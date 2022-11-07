@@ -23,7 +23,7 @@ jobs:
           REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
         run: |
           export MAVEN_OPTS="-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
-          mvn -B -Pnative spring-boot:build-image 
+          mvn -B -Pgithub -Pnative spring-boot:build-image
       - uses: azure/webapps-deploy@v2
         with:
           app-name: 'boot3demo'

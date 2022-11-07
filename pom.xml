@@ -42,31 +42,50 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<image>
-						<name>boot3demo.azurecr.io/${project.artifactId}</name>
-						<publish>true</publish>
-					</image>
-					<docker>
-						<publishRegistry>
-							<username>${env.REGISTRY_USERNAME}</username>
-							<password>${env.REGISTRY_PASSWORD}</password>
-							<url>https://boot3demo.azurecr.io/</url>
-						</publishRegistry>
-					</docker>
-					<layers>
-						<enabled>true</enabled>
-						<includeLayerTools>true</includeLayerTools>
-					</layers>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+
+	<profiles>
+		<profile>
+			<id>github</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<image>
+								<name>boot3demo.azurecr.io/${project.artifactId}</name>
+								<publish>true</publish>
+							</image>
+							<docker>
+								<publishRegistry>
+									<username>${env.REGISTRY_USERNAME}</username>
+									<password>${env.REGISTRY_PASSWORD}</password>
+									<url>https://boot3demo.azurecr.io/</url>
+								</publishRegistry>
+							</docker>
+							<layers>
+								<enabled>true</enabled>
+								<includeLayerTools>true</includeLayerTools>
+							</layers>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>!github</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+
 	<repositories>
 		<repository>
 			<id>spring-milestones</id>
